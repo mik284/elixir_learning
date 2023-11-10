@@ -1,3 +1,5 @@
+![image](https://github.com/mik284/elixir_learning/assets/65639270/5c693bb0-c3d0-4c10-9a3a-05c2621d876b)
+
 # LEARNING ELIXIR PROGRAMMING
 Elixir is a powerful and functional programming language designed for building scalable and maintainable applications. It's known for its concurrency model, fault-tolerance, and scalability.
 
