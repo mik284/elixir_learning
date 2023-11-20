@@ -69,4 +69,8 @@ IO.puts(result)
 ### Try to make result an array
 
 ## NB:
-> The pipe operator enhances the readability of the code, especially when dealing with a sequence of operations, by allowing you to read the operations from left to right. It is a key feature of Elixir that promotes a functional and compositional programming style.
+> * The pipe operator enhances the readability of the code, especially when dealing with a sequence of operations, by allowing you to read the operations from left to right. It is a key feature of Elixir that promotes a functional and compositional programming style.
+
+> * when using the pipe operator the first element becomes an argument, in terms of arity e.g ()/2
+
+### research on (=~) operator
