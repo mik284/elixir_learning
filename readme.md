@@ -66,3 +66,9 @@ This approach contributes to the overall stability of concurrent programs.
         - String Concatenation
 - Fucntions in Elixir : https://elixirschool.com/en/lessons/basics/functions
 - Pattern matching (to be covered next week)
+### Week 2 and 3
+* Pattern matching
+* tuples
+* list
+* operators
+* module and functions

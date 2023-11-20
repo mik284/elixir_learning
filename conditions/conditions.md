@@ -27,9 +27,40 @@ unless color == "blue" do
 end
 
 # output: nil
+
+unless color != "blue" do
+"yes"
+end
+
+# output: "yes"
 ```
+
 ```elixir
 #example of a one liner
 unless color == "blue", do: "yes
 nil
 ```
+
+## if else
+
+```elixir
+#example  of if else condition
+color="blue"
+
+if color == "red" do
+"yes"
+else
+"no"
+end
+
+# output: "no"
+
+#example of a one liner
+if color == "blue", do: "yes, else: "no"
+# output: "no"
+```
+
+> same can happen to unlesss (else)
+
+
+## Case (->)
