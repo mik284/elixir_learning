@@ -73,4 +73,4 @@ IO.puts(result)
 
 > * when using the pipe operator the first element becomes an argument, in terms of arity e.g ()/2
 
-### research on (=~) operator
+### research on Sigil(~) operator

@@ -114,3 +114,7 @@ result = "success"
 result
 #output: "error"
 ```
+
+## Pattern matching in List
+
+  > 
