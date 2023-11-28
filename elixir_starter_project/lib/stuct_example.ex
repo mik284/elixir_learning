@@ -1,9 +1,4 @@
 defmodule User do
-<<<<<<< HEAD
-  defstruct [:name , :age ] #expects keys
- # defstruct [name: "Miguel",age: 35] # keys with difault values
-end
-=======
   #defing a struct
   # defstruct [:name, :age]  #expects keys
  defstruct [name: "Miguel",age: 35] # keys with difault values
@@ -32,4 +27,3 @@ end
 
 # Miguel joe
 # 46
->>>>>>> 768435ff3d65283c77f78c29b6d91d7754a3fe00
