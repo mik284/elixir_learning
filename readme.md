@@ -489,11 +489,41 @@ c
 ```elixir
 mix new your_project_name
 ```
+This creates a new folder named my_project containing a couple of subfolders and
+files. You can change to the my_project folder and compile the entire project: 
 
 <!-- livebook:{"break_markdown":true} -->
 
 > make sure to follow elixir naming convention
+```cmd 
+$ cd my_project
 
+$ mix compile
+Compiling 1 file (.ex)
+Generated my_project app
+```
+
+The compilation goes through all the files from the lib folder and places the resulting
+.beam files in the ebin folder.
+
+You can execute various mix commands on the project. For example, the generator
+created the module MyProject with the single function hello/0. You can invoke it with
+mix run:
+
+```cmd
+$ mix run -e "IO.puts(MyProject.hello())"
+world
+```
+The generator also create a couple of tests, which can be executed with mix test:
+
+```cmd
+$ mix test
+..
+Finished in 0.03 seconds
+2 tests, 0 failures
+```
+Regardless of how you start the mix project, it ensures that the ebin folder (where the
+.beam files are placed) is in the load path so the VM can find your modules.
 <!-- livebook:{"break_markdown":true} -->
 
 https://elixirschool.com/en/lessons/basics/mix
@@ -803,3 +833,402 @@ listD |> Enumerable.count()
 ```
 {:ok, 4}
 ```
+
+# week 6
+
+## Binaries and bistrings
+
+A binary is a chunk of bytes
+
+<!-- livebook:{"break_markdown":true} -->
+
+> You can create binaries by enclosing the byte sequence
+> between << and >> operators.
+
+```elixir
+<<1, 2, 3>>
+```
+
+Each number represents the value of the corresponding byte. If you provide a byte
+value bigger than 255, it’s truncated to the byte size:
+
+```elixir
+# 1
+<<257>>
+# 0
+<<256>>
+```
+
+You can specify the size of each value and thus tell the compiler how many bits to use
+for that particular value:
+
+```elixir
+<<257::16>>
+```
+
+```elixir
+<<257::32>>
+```
+
+If the total size of all the values isn’t a multiple of 8, the binary is called a bitstring — a
+sequence of bits:
+
+```elixir
+<<257::12>>
+```
+
+You can also concatenate two binaries or bitstrings with the operator <>:
+
+```elixir
+<<2>> <> <<4>>
+```
+
+## Strings
+
+```elixir
+"This is a string"
+```
+
+The most common way to use strings is to specify them with the familiar double-quotes
+
+<!-- livebook:{"break_markdown":true} -->
+
+result is printed as a string, but underneath it’s a binary — nothing more than a
+consecutive sequence of bytes.
+
+<!-- livebook:{"break_markdown":true} -->
+
+> Elixir provides support for embedded string expressions. You can use #{} to place an
+> Elixir expression in a string constant. The expression is immediately evaluated, and its
+> string representation is placed at the corresponding location in the string:
+
+```elixir
+"Embedded expression: #{3 + 0.14}"
+```
+
+### Classical \ escaping works as you’re used to:
+
+<!-- livebook:{"break_markdown":true} -->
+
+And strings don’t have to finish on the same line:
+
+```elixir
+# "\r \n \" \\"
+"
+This is
+a multiline string
+"
+```
+
+> another syntax for declaring strings
+
+### sigils
+
+In this approach,
+you enclose the string inside ~s():
+
+```elixir
+~s(This is also a string)
+```
+
+Sigils can be useful if you want to include quotes in a string:
+
+```elixir
+~s("Do... or do not. There is no try." -Master Yoda)
+```
+
+There’s also an uppercase version ~S that doesn’t handle interpolation or escape characters
+(\):
+
+```elixir
+~S(Not interpolated #{3 + 0.14})
+```
+
+```elixir
+~S(Not escaped \n)
+```
+
+Finally, there’s a special heredocs syntax, which supports better formatting for multiline
+strings. Heredocs strings start with a triple double-quote. The ending triple double-quote
+must be on its own line:
+
+```elixir
+"""
+Heredoc must end on its own line \"""
+"""
+```
+
+Because strings are binaries, you can concatenate them with the <> operator:
+
+```elixir
+"String" <> " " <> "concatenation"
+```
+
+### Character lists
+
+<!-- livebook:{"break_markdown":true} -->
+
+The alternative way of representing strings is to use single-quote syntax:
+
+```elixir
+~c"abc"
+```
+
+```elixir
+[64, 66, 67]
+```
+
+```elixir
+~c"Interpolation: #{3 + 0.14}"
+```
+
+```elixir
+~c(Character list sigil)
+```
+
+```elixir
+~C(Unescaped sigil #{3 + 0.14})
+```
+
+```elixir
+~c"""
+hey mike
+"""
+```
+
+> even the runtime doesn’t distinguish between a list of integers and a
+> character list. When a list consists of integers that represent printable characters, it’s
+> printed to the screen in the string form.
+> Just like with binary strings, there are syntax counterparts for various definitions of
+> character lists
+
+<!-- livebook:{"break_markdown":true} -->
+
+#### Note:
+
+> Character lists aren’t compatible with binary strings. Most of the operations from the
+> String module won’t work with character lists. In general, you should prefer binary
+> strings over character lists.
+
+## Functions - First-class functions
+
+> In Elixir, a function is a first-class citizen, which means it can be assigned to a variable.
+
+<!-- livebook:{"break_markdown":true} -->
+
+Assigning a function to a variable doesn’t mean calling the function and storing
+its result to a variable. Instead, the function definition itself is assigned, and you can
+use the variable to call the function.
+
+<!-- livebook:{"break_markdown":true} -->
+
+> To create a function variable, you can use the fn
+> construct:
+
+```elixir
+square = fn x ->
+  x * x
+end
+```
+
+##### Note:
+
+> The variable square now contains a function that computes the square of a number.
+> Because the function isn’t bound to a global name, it’s also called an <strong>anonymous function
+> or a lambda.</strong>
+
+<!-- livebook:{"break_markdown":true} -->
+
+You can call this function by specifying the variable name followed by a dot (.) and
+the arguments:
+
+```elixir
+square.(8)
+```
+
+##### NOTE:
+
+> You may wonder why the dot operator is needed here. The motivation
+> behind the dot operator is to make the code more explicit. When you encounter
+> a square.(5) expression in the source code, you know an anonymous
+> function is being invoked. In contrast, the expression square(5) is invoking a
+> named function defined somewhere else in the module. Without the dot operator,
+> you’d have to parse the surrounding code to understand whether you’re
+> calling a named or an anonymous function.
+
+<!-- livebook:{"break_markdown":true} -->
+
+#### the '&' capture operator
+
+<!-- livebook:{"break_markdown":true} -->
+
+The & operator, also known as the capture operator, takes the full function qualifier —
+a module name, a function name, and an arity — and turns that function into a lambda
+that can be assigned to a variable. You can use the capture operator to simplify the call
+
+```elixir
+Enum.each([1, 2, 3, 4], &IO.puts/1)
+```
+
+The capture operator can also be used to shorten the lambda definition, making it
+possible to omit explicit argument naming. For example, you can turn this definition
+
+```elixir
+lambda = fn x, y, z -> x * y + z end
+lambda.(1, 2, 3)
+```
+
+```elixir
+lambda = &(&1 * &2 + &3)
+lambda.(5, 6, 10)
+# The return value 40 amounts to 5 * 6 + 10 , as specified in the lambda definition.
+```
+
+> This snippet creates a three-arity lambda. Each argument is referred to via the &n placeholder,
+> which identifies the nth argument of the function. You can call this lambda like
+> any other:
+
+<!-- livebook:{"break_markdown":true} -->
+
+#### Closures
+
+<!-- livebook:{"break_markdown":true} -->
+
+A lambda can reference any variable from the outside scope:
+
+```elixir
+outside_var = 5
+
+my_lambda = fn ->
+  # Lambda references a variable from the outside scope
+  IO.puts(outside_var)
+end
+
+my_lambda.()
+```
+
+#### Note:
+
+> As long as you hold the reference to my_lambda, the variable outside_var is also accessible.
+> This is also known as <i><strong>closure</strong></i> : by holding a reference to a lambda, you indirectly
+> hold a reference to all variables it uses, even if those variables are from the external
+> scope.
+
+<!-- livebook:{"break_markdown":true} -->
+
+closure always captures a specific memory location. Rebinding a variable doesn’t
+affect the previously defined lambda that references the same symbolic name
+
+```elixir
+outside_var = 5
+# Lambda captures the current location of outside_var
+lambda = fn -> IO.puts(outside_var) end
+# Rebinding doesn’t affect the closure.
+outside_var = 6
+# Proof that the closure isn’t affected
+lambda.()
+```
+
+## Higher-level typesHigher-level types
+
+#### Range
+
+<!-- livebook:{"break_markdown":true} -->
+
+A range is an abstraction that allows you to represent a range of numbers. Elixir even
+provides a special syntax for defining ranges:
+
+```elixir
+lltt = 1..5
+# You can ask whether a number falls in the range by using the in operator:
+6 in lltt
+```
+
+Ranges are enumerable, so functions from the Enum module know how to work with
+them. Earlier you met Enum.each/2, which iterates through an enumerable. The
+following example uses this function with a range to print the first three natural
+numbers:
+
+```elixir
+Enum.each(
+  1..3,
+  &IO.puts/1
+)
+```
+
+##### NOTE:
+
+> It’s important to realize that a range isn’t a special type. Internally, it’s represented as
+> a map that contains range boundaries. You shouldn’t rely on this knowledge, because
+> the range representation is an implementation detail, but it’s good to be aware that
+> the memory footprint of a range is very small, regardless of the size. A million-number
+> range is still just a small map.
+
+<!-- livebook:{"break_markdown":true} -->
+
+#### Keyword lists
+
+<!-- livebook:{"break_markdown":true} -->
+
+A keyword list is a special case of a list, where each element is a two-element tuple, and
+the first element of each tuple is an atom. The second element can be of any type.
+
+```elixir
+days = [{:monday, 1}, {:tuesday, 2}, {:wednesday, 3}]
+# Elixir allows a slightly more elegant syntax for defining a keyword list:
+days = [monday: 1, tuesday: 2, wednesday: 3]
+# Both constructs yield the same result
+```
+
+```elixir
+Keyword.get(days, :monday)
+# Keyword.get(days, :noday) -> nil
+```
+
+Just as with maps, you can use the operator [] to fetch a value:
+
+```elixir
+days[:tuesday]
+```
+
+> Don’t let that fool you, though. Because you’re dealing with a list, the complexity of a
+> lookup operation is O(n).
+
+```elixir
+IO.inspect([100, 200], width: 4)
+```
+
+#### MapSets
+
+```elixir
+days = MapSet.new([:monday, :tuesday, :wednesday])
+# MapSet.member?(days, :monday) -> true
+# MapSet.member?(days, :noday) -> false
+days = MapSet.put(days, :thursday)
+# A MapSet is also an enumerable, so you can pass it to functions from the Enum module
+Enum.each(days, &IO.puts/1)
+```
+
+### SUMMARY
+
+<!-- livebook:{"break_markdown":true} -->
+
+* Elixir code is divided into modules and functions.
+* Elixir is a dynamic language. The type of a variable is determined by the value it holds.
+* Data is immutable — it can’t be modified. A function can return the modified
+  version of the input that resides in another memory location. The modified version
+  shares as much memory as possible with the original data.
+* The most important primitive data types are numbers, atoms, and binaries.
+* There is no Boolean type. Instead, the atoms true and false are used.
+* There is no nullability. The atom nil can be used for this purpose.
+* There is no string type. Instead, you can use either binaries (recommended) or
+  lists (when needed).
+* The built-in complex types are tuples, lists, and maps. Tuples are used to group
+  a small, fixed-size number of fields. Lists are used to manage variable-size collections.
+  A map is a key/value data structure.
+* Range, keyword lists, MapSet, Date, Time, NaiveDateTime, and DateTime are
+  abstractions built on top of the existing built-in types.
+* Functions are first-class citizens.
+* Module names are atoms (or aliases) that correspond to .beam files on the disk.
+* There are multiple ways of starting programs: iex, elixir, and the mix tool.
+
