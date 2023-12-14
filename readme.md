@@ -1232,3 +1232,419 @@ Enum.each(days, &IO.puts/1)
 * Module names are atoms (or aliases) that correspond to .beam files on the disk.
 * There are multiple ways of starting programs: iex, elixir, and the mix tool.
 
+# Week 7
+
+## control flow
+
+### functions
+
+<!-- livebook:{"break_markdown":true} -->
+
+pattern matching in functions
+
+```elixir
+defmodule Function_pattern do
+  # will be of arity 1
+  def sum({a, b}) do
+    # def sum(a,b) do #will be of arity 2
+    a + b
+  end
+end
+
+# Function_pattern.sum 4,5
+Function_pattern.sum({4, 5})
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+9
+```
+
+##### Method overloading  and overriding in elixir
+
+<!-- livebook:{"break_markdown":true} -->
+
+### multiclause functions
+
+```elixir
+defmodule User_details do
+  # uses multiclause functions
+  # first user clause
+  def user(:admin, name, phone) do
+    IO.puts(name)
+    IO.puts(phone)
+  end
+
+  # second user clause
+  def user(:normaluser, name) do
+    IO.puts(name)
+  end
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:module, User_details, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:user, 2}}
+```
+
+## Capture operator and Arity on pattern matching
+
+can take &1 , &2 meaning argument 1 argument 2 and so on
+
+<!-- livebook:{"break_markdown":true} -->
+
+on compilation it is assign
+
+```elixir
+fn x -> x end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+can also be represented as
+
+```elixir
+& &1
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+provide a consice way of short line functions
+
+```elixir
+# mult of a number
+&(&1 * &2 / &3 + &4)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<39.105768164/4 in :erl_eval.expr/6>
+```
+
+If, for instance, you call my_admin.(a, b, c, d), where a, b, c, and d are arguments, it will result in an error because my_admin is specifically defined to have arity 3. Similarly, calling my_user.(x, y, z) would result in an error for the same reason.
+
+```elixir
+# using the famous gigo ... garbage in gargabe out
+# we can assign our functions to a lambda fn using the capture operator
+# how?
+# will be of arity 3 
+my_admin = &User_details.user(&1, &2, &3)
+# &User_details.user/3
+# will be of arity 2 
+my_user = &User_details.user(&1, &2)
+# &User_details.user/2
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+&User_details.user/2
+```
+
+This is where the concept of GIGO comes into play. If you provide arguments that do not match the expected arity, or if the patterns defined in your functions don't align with the structure of the input data, you may get unexpected results or errors.
+
+<!-- livebook:{"break_markdown":true} -->
+
+> Garbage In, Garbage Out" (GIGO) essentially conveys the idea that if you provide a system with incorrect or nonsensical input (garbage), you shouldn't expect meaningful or correct output. This concept is widely applicable across various domains, emphasizing the importance of input quality in achieving desirable results.
+
+```elixir
+my_admin.(:admin, "mikeAdmin", 07_394_837_336)
+# mikeAdmin
+# 7394837336
+
+# so waht if we give my_admin an aruty of 2
+my_admin.(:admin, "mikeAdmin")
+#  &User_details.user/3 with arity 3 called with 2 arguments (:admin, "mikeAdmin")
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+mikeAdmin
+7394837336
+```
+
+```elixir
+my_user.(:normaluser, "mongo")
+# same if you give it an arity of 3
+my_user.(:normaluser, "mongo", 89898)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+mongo
+```
+
+This explains the Garbage in Garbage out also applies to pattern matching since you are trying to match to a pattern you gave it
+
+<!-- livebook:{"break_markdown":true} -->
+
+pattern matching plays a crucial role, GIGO can be related to the patterns you use in function heads. When you define functions with multiple clauses and patterns, the system will match the input against those patterns, and the result will depend on how well the input matches the expected patterns.
+
+<!-- livebook:{"break_markdown":true} -->
+
+#### Note:
+
+> In functional programming, the clarity of your pattern matching and the adherence of your input data to those patterns are crucial for reliable and predictable program behavior. It emphasizes the importance of validating and ensuring the correctness of your input data before processing it through your functions to avoid unintended consequences.
+
+## Handling errors using pattern Matching
+
+To excape runtime errors one can write a function to handle uncertainity
+
+```elixir
+defmodule Multi_clause do
+  def area(:circle, radius) do
+    # Calculate the area of a circle using the formula: π * r^2
+    Kernel.ceil(:math.pi() * :math.pow(radius, 2))
+  end
+
+  def area(_shape, _arg1) do
+    {:error, "Invalid arguments for the area of a circle"}
+  end
+
+  def area(:rectangle, length, width) do
+    length * width
+  end
+
+  def area(_shape, _arg1, _arg2) do
+    {:error, "Invalid arguments for the area of a rectangle"}
+  end
+
+  def area(_shape, _arg1, _arg2, _rr) do
+    {:error, "Invalid arguments...."}
+  end
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:module, Multi_clause, <<70, 79, 82, 49, 0, 0, 9, ...>>, {:area, 4}}
+```
+
+```elixir
+Multi_clause.area(:circle, 5)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+79
+```
+
+## Guards
+
+1. [Sudaycoding Blog about Guards](https://blog.sundaycoding.com/blog/2017/12/27/elixir-with-syntax-and-guard-clauses/)
+
+<!-- livebook:{"break_markdown":true} -->
+
+1. [Watch Guards on youtube](https://www.youtube.com/watch?v=mGobuD8J99E)
+
+<!-- livebook:{"break_markdown":true} -->
+
+1. [Elixir cast on Guards](https://elixircasts.io/elixir-guards)
+
+<!-- livebook:{"break_markdown":true} -->
+
+The guard is a logical expression that places further conditions on a clause.
+The set of operators and functions that can be called from guards is very limited. In
+particular, you may not call your own functions, and most of the other functions won’t
+work. These are some examples of operators and functions allowed in guards:
+
+* Comparison operators (==, !=, ===, !==, >, <, <=, >=)
+* Boolean operators (and, or) and negation operators (not, !)
+* Arithmetic operators (+, -, *, /)
+* Type-check functions from the Kernel module (for example, is_number/1, is_
+  atom/1, and so on)
+
+```elixir
+defmodule GuardsFunctions do
+  defguard check_age(age) when is_number(age) and age >= 18
+  defguard check_age_less(age) when is_number(age) and age < 18
+end
+
+defmodule Guard_Implementation do
+  import GuardsFunctions
+  # def get_age(age) when is_number(age) and age >= 18 do
+  #   IO.puts("You are an adult")
+  # end
+
+  # def get_age(age) when is_number(age) and age < 18 do
+  #   IO.puts("You cannot drink")
+  # end
+
+  def get_age(age) when check_age(age) do
+    IO.puts("You are an adult")
+  end
+
+  def get_age(age) when check_age_less(age) do
+    IO.puts("You cannot drink")
+  end
+
+  def get_age(_agee) do
+    {:error, "Invalid age details..."}
+  end
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:module, Guard_Implementation, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:get_age, 1}}
+```
+
+In some cases, a function used in a guard may cause an error to be raised. For example,
+length/1 makes sense only on lists. Imagine you have the following function that
+calculates the smallest element of a non-empty list:
+
+```elixir
+defmodule ListHelper do
+  def smallest(list) when length(list) > 0 do
+    Enum.min(list)
+  end
+
+  def smallest(_), do: {:error, :invalid_argument}
+end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+{:module, ListHelper, <<70, 79, 82, 49, 0, 0, 7, ...>>, {:smallest, 1}}
+```
+
+You may think that calling ListHelper.smallest/1 with anything other than a list will
+raise an error, but this won’t happen. If an error is raised from inside the guard, it
+won’t be propagated, and the guard expression will return false. The corresponding
+clause won’t match, but some other might.
+In the preceding example, if you call ListHelper.smallest(123), you’ll get the
+result
+
+<!-- livebook:{"force_markdown":true} -->
+
+```elixir
+{:error, :invalid_argument}
+```
+
+This demonstrates that an error in the guard
+expression is internally handled.
+
+<!-- livebook:{"break_markdown":true} -->
+
+### Multiclause lambdas
+
+<!-- livebook:{"break_markdown":true} -->
+
+* Anonymous functions (lambdas) may also consist of multiple clauses.
+* recall the
+  basic way of defining and using lambdas:
+
+```elixir
+# Defines a lambda
+double = fn x -> x * 2 end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+```elixir
+# Calls a lambda
+double.(3)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+6
+```
+
+lambda syntax has the following shape
+
+```elixir
+fn
+pattern_1, pattern_2 ->
+#... Executed if pattern_1 matches,
+pattern_3, pattern_4 ->
+#...Executed if pattern_2 matches
+...
+end
+```
+
+reimplementing the test/1 function that inspects whether a
+number is positive, negative, or zero
+
+```elixir
+test_num =
+  fn
+    x when is_number(x) and x < 0 ->
+      :negative
+
+    0 ->
+      :zero
+
+    x when is_number(x) and x > 0 ->
+      :positive
+  end
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Function<42.105768164/1 in :erl_eval.expr/6>
+```
+
+> Notice: There’s no special ending terminator for a lambda clause. The clause ends
+> when the new clause is started (in the form pattern →) or when the lambda definition
+> is finished with end.
+
+<!-- livebook:{"break_markdown":true} -->
+
+Because all clauses of a lambda are listed under the same fn expression, the parentheses
+for each clause are by convention omitted. In contrast, each clause of a named
+function is specified in a separate def (or defp) expression. As a result, parentheses
+around named function arguments are recommended
+
+```elixir
+test_num.(-1)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:negative
+```
+
+```elixir
+test_num.(0)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:zero
+```
+
+```elixir
+test_num.(1)
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:positive
+```
