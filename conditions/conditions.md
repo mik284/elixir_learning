@@ -64,3 +64,29 @@ if color == "blue", do: "yes, else: "no"
 
 
 ## Case (->)
+syntax
+
+```elixir
+case expression do
+pattern_1 -> #pattern here indicates that it deals with pattern matching.
+...
+pattern_2 ->
+...
+...
+end
+```
+
+* In the case construct, the provided expression is evaluated, and then the result is matched against the given clauses. 
+* The first one that matches is executed, and the result of the corresponding
+block (its last expression) is the result of the entire case expression. 
+* If no clause matches, an error is raised.
+
+> Note: The case construct is most suitable if you don’t want to define a separate multiclause
+function.
+
+> In fact, the general case syntax can be directly translated into the multiclause approach:
+```elixir
+defp fun(pattern_1), do: ...
+defp fun(pattern_2), do: ...
+... #The default clause that always matches
+```
