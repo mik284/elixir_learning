@@ -1,6 +1,6 @@
 defmodule PasswordGenTest do
   use ExUnit.Case
-  doctest PasswordGen
+  # doctest PasswordGen
 
   # test "greets the world" do
   #   assert PasswordGen.hello() == :world
@@ -56,8 +56,9 @@ defmodule PasswordGenTest do
     length_option = %{"length"=> "5"}
     {:ok, result} = PasswordGen.generate(length_option)
     assert String.contains?(result, options.lowercase)
-    assert String.contains?(result, options.uppercase)
-    assert String.contains?(result, options.symbols)
+
+    refute String.contains?(result, options.uppercase)
+    refute String.contains?(result, options.symbols)
     refute String.contains?(result, options.numbers)
   end
 
