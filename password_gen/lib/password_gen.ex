@@ -119,9 +119,14 @@ defmodule PasswordGen do
   defp get(:uppercase) do
     <<Enum.random(?A..?Z)>>
   end
+
   defp get(:numbers) do
     Enum.random(0..9)
     |> Integer.to_string()
+  end
+
+  defp get(:symbols) do
+    String.split("!#$%&()*+,-./:;<=>?@[]^_{|}~", "", trim: true)
   end
 
   defp generate_random_string(length, options) do
