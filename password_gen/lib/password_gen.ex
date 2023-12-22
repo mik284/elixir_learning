@@ -116,6 +116,10 @@ defmodule PasswordGen do
     <<Enum.random(?a..?z)>>
   end
 
+  defp get(:uppercase) do
+    <<Enum.random(?A..?Z)>>
+  end
+
   defp generate_random_string(length, options) do
     Enum.map(1..length, fn _ ->
       Enum.random(options) |> get()
