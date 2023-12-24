@@ -1,77 +1,93 @@
 ![image](https://github.com/mik284/elixir_learning/assets/65639270/986b36e3-e261-4e18-9dcc-8bc3ccf7ab0b)
 
 # LEARNING ELIXIR PROGRAMMING
+
 Elixir is a powerful and functional programming language designed for building scalable and maintainable applications. It's known for its concurrency model, fault-tolerance, and scalability.
 
 #### Resources
-* Elixir docs: https://hexdocs.pm/elixir/1.16/introduction.html
-* Elixir Drops : https://www.youtube.com/@ElixirDrops
-* Elixir Casts: https://www.youtube.com/@elixircasts2332
-* Podcast : https://podcast.thinkingelixir.com/
-* Books : https://elixir-lang.org/learning.html
-* school : https://elixirschool.com/en
+
+- Elixir docs: https://hexdocs.pm/elixir/1.16/introduction.html
+- Elixir Drops : https://www.youtube.com/@ElixirDrops
+- Elixir Casts: https://www.youtube.com/@elixircasts2332
+- Podcast : https://podcast.thinkingelixir.com/
+- Books : https://elixir-lang.org/learning.html
+- school : https://elixirschool.com/en
 
 #### Key concepts
+
 - Concurrency Model:
 
   - Elixir runs on the Erlang Virtual Machine (BEAM), which is designed for building distributed and fault-tolerant systems.
-   - Processes in Elixir are lightweight and isolated, and they communicate through message passing.
+  - Processes in Elixir are lightweight and isolated, and they communicate through message passing.
+
 - Functional Programming:
 
-    - Elixir is a functional programming language, which means it emphasizes immutability and pure functions.
-Pattern matching, recursion, and higher-order functions are common in Elixir.
+      - Elixir is a functional programming language, which means it emphasizes immutability and pure functions.
+
+  Pattern matching, recursion, and higher-order functions are common in Elixir.
+
 - Immutable Data Structures:
 
-    - Elixir uses immutable data structures. Instead of modifying data in place, new data structures are created.
-This approach contributes to the overall stability of concurrent programs.
+      - Elixir uses immutable data structures. Instead of modifying data in place, new data structures are created.
+
+  This approach contributes to the overall stability of concurrent programs.
+
 - OTP (Open Telecom Platform):
 
-    - OTP is a set of libraries and design principles for building scalable and fault-tolerant systems.
-    - It includes features like supervisors for process management, gen_servers for building stateful processes, and more.
+  - OTP is a set of libraries and design principles for building scalable and fault-tolerant systems.
+  - It includes features like supervisors for process management, gen_servers for building stateful processes, and more.
+
 - Pattern Matching:
 
-    - Elixir leverages pattern matching extensively. It's used in function heads, case statements, and more.
-    - It allows for concise and expressive code.
+  - Elixir leverages pattern matching extensively. It's used in function heads, case statements, and more.
+  - It allows for concise and expressive code.
+
 - Mix:
 
-    - Mix is a build tool and package manager for Elixir projects. It helps you create, compile, and test projects.
-    - It also manages dependencies and provides tasks for common development workflows.
+  - Mix is a build tool and package manager for Elixir projects. It helps you create, compile, and test projects.
+  - It also manages dependencies and provides tasks for common development workflows.
+
 - Phoenix Framework:
 
-    - Phoenix is a web framework for Elixir that makes it easy to build scalable and maintainable web applications.
-    - It follows the model-view-controller (MVC) pattern and includes features like channels for real-time communication.
+  - Phoenix is a web framework for Elixir that makes it easy to build scalable and maintainable web applications.
+  - It follows the model-view-controller (MVC) pattern and includes features like channels for real-time communication.
+
 - Documentation:
 
-    - Elixir has a strong emphasis on documentation. You can generate and view documentation for your projects using ex_doc.
+  - Elixir has a strong emphasis on documentation. You can generate and view documentation for your projects using ex_doc.
 
 ### Week:one
-* iex : the interactive terminal of elixer which is used to debbug, compile and run commands like arithmetic logic 1 + 1.
+
+- iex : the interactive terminal of elixer which is used to debbug, compile and run commands like arithmetic logic 1 + 1.
   - Link: https://hexdocs.pm/iex/1.15.7/IEx.html
   - Elixir's interactive shell.
-* Basics : https://elixirschool.com/en/lessons/basics/basics
-   - Getting Started
-        - Installing Elixir
-        - Trying Interactive Mode
-    - Basic Data Types
-        - Integers
-        - Floats
-        - Booleans
-        - Atoms
-        - Strings
-    - Basic Operations
-        - Arithmetic
-        - Boolean
-        - Comparison
-        - String Interpolation
-        - String Concatenation
-- Fucntions in Elixir : https://elixirschool.com/en/lessons/basics/functions
-- Pattern matching (to be covered next week)
+- Basics : https://elixirschool.com/en/lessons/basics/basics
+  - Getting Started
+    - Installing Elixir
+    - Trying Interactive Mode
+  - Basic Data Types
+    - Integers
+    - Floats
+    - Booleans
+    - Atoms
+    - Strings
+  - Basic Operations
+    - Arithmetic
+    - Boolean
+    - Comparison
+    - String Interpolation
+    - String Concatenation
+
+* Fucntions in Elixir : https://elixirschool.com/en/lessons/basics/functions
+* Pattern matching (to be covered next week)
+
 ### Week 2 and 3
-* Pattern matching
-* tuples
-* list
-* operators
-* module and functions
+
+- Pattern matching
+- tuples
+- list
+- operators
+- module and functions
 
 ### week 4 and 5
 
@@ -191,7 +207,7 @@ Explain the following using the knowledge in pattern matching in list
 [2, 2]
 ```
 
-In Elixir, variables are immutable, which means that once a variable is assigned a value, it cannot be changed.  Therefore, the statement [a, a] = [1, 1] will match the pattern and bind the variable a to the value 1. However, when you attempt [a, a] = [1, 2], it will raise a MatchError because the pattern [a, a] does not match the right-hand side [1, 2], where the values of a are different.
+In Elixir, variables are immutable, which means that once a variable is assigned a value, it cannot be changed. Therefore, the statement [a, a] = [1, 1] will match the pattern and bind the variable a to the value 1. However, when you attempt [a, a] = [1, 2], it will raise a MatchError because the pattern [a, a] does not match the right-hand side [1, 2], where the values of a are different.
 
 ## Maps
 
@@ -291,14 +307,14 @@ To access atom keys, one may also use the map.key notation. Note that map.key wi
 
 > Note:
 
-* The two syntaxes for accessing keys reveal the dual nature of maps. The map[key] syntax is used for dynamically created maps that may have any key, of any type.
-* <b>map.key</b> is used with maps that hold a predetermined set of atoms keys, which are expected to always be present.
+- The two syntaxes for accessing keys reveal the dual nature of maps. The map[key] syntax is used for dynamically created maps that may have any key, of any type.
+- <b>map.key</b> is used with maps that hold a predetermined set of atoms keys, which are expected to always be present.
 
 <!-- livebook:{"break_markdown":true} -->
 
 > ### Avoid parentheses
 
-* Do not add parentheses when accessing fields, such as in <b>data.key()</b>. If parentheses are used, Elixir will expect data to be an atom representing a module and attempt to call the function key/0 in it.
+- Do not add parentheses when accessing fields, such as in <b>data.key()</b>. If parentheses are used, Elixir will expect data to be an atom representing a module and attempt to call the function key/0 in it.
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -381,7 +397,7 @@ total
 
 ## Structs
 
-* Structs built on the map syntax by passing the struct name between % and {. For example, %User{...}.
+- Structs built on the map syntax by passing the struct name between % and {. For example, %User{...}.
 
 ```elixir
 defmodule User do
@@ -424,7 +440,7 @@ new_user.name
 
 ## underscore
 
-> In Elixir, the underscore (_) is used as a placeholder when you want to ignore a variable in a pattern match or when you're not interested in the value. It's often used as a convention to indicate that a particular value is intentionally being ignored.
+> In Elixir, the underscore (\_) is used as a placeholder when you want to ignore a variable in a pattern match or when you're not interested in the value. It's often used as a convention to indicate that a particular value is intentionally being ignored.
 
 ```elixir
 # Example of a list
@@ -489,13 +505,15 @@ c
 ```elixir
 mix new your_project_name
 ```
+
 This creates a new folder named my_project containing a couple of subfolders and
-files. You can change to the my_project folder and compile the entire project: 
+files. You can change to the my_project folder and compile the entire project:
 
 <!-- livebook:{"break_markdown":true} -->
 
 > make sure to follow elixir naming convention
-```cmd 
+
+```cmd
 $ cd my_project
 
 $ mix compile
@@ -514,6 +532,7 @@ mix run:
 $ mix run -e "IO.puts(MyProject.hello())"
 world
 ```
+
 The generator also create a couple of tests, which can be executed with mix test:
 
 ```cmd
@@ -522,16 +541,18 @@ $ mix test
 Finished in 0.03 seconds
 2 tests, 0 failures
 ```
+
 Regardless of how you start the mix project, it ensures that the ebin folder (where the
 .beam files are placed) is in the load path so the VM can find your modules.
+
 <!-- livebook:{"break_markdown":true} -->
 
 https://elixirschool.com/en/lessons/basics/mix
 
 ## STRUCT
 
-* A specialized map with an identity for example
-* Link : https://hexdocs.pm/elixir/1.16.0-rc.0/structs.html
+- A specialized map with an identity for example
+- Link : https://hexdocs.pm/elixir/1.16.0-rc.0/structs.html
   ```elixir
   %{}#map
   %identity{} #struct
@@ -542,8 +563,8 @@ https://elixirschool.com/en/lessons/basics/mix
 
 > During definig values one can has default values i.e predefined keys
 
-* After compilation you can only used the already named values
-* it can have a custome name that has diff fields
+- After compilation you can only used the already named values
+- it can have a custome name that has diff fields
 
 > NOTE: if you want a fixed structure structs are the go to, flexible maps are the go to
 
@@ -551,7 +572,7 @@ https://elixirschool.com/en/lessons/basics/mix
 
 ### Defining the syntax
 
-* To define a struct we use defstruct along with a keyword list of fields and default values:
+- To define a struct we use defstruct along with a keyword list of fields and default values:
   ```elixir
   defmodule Example.User do
   defstruct name: "Sean", roles: []
@@ -650,8 +671,8 @@ Miguel joe
 
 > NOTE:
 
-* The value is not strongly attached struct but the key is
-* If you want to have fixed/immutabilty use maps
+- The value is not strongly attached struct but the key is
+- If you want to have fixed/immutabilty use maps
 
 <!-- livebook:{"reevaluate_automatically":true} -->
 
@@ -811,8 +832,8 @@ age
 
 > Pattern matching on Enum
 
-* Assignment
-  * use pipe operator to get the count of a list using Enumerable protocol on map/list/tuple
+- Assignment
+  - use pipe operator to get the count of a list using Enumerable protocol on map/list/tuple
 
 ```elixir
 listD = [2, 4, 5, 6]
@@ -1213,24 +1234,24 @@ Enum.each(days, &IO.puts/1)
 
 <!-- livebook:{"break_markdown":true} -->
 
-* Elixir code is divided into modules and functions.
-* Elixir is a dynamic language. The type of a variable is determined by the value it holds.
-* Data is immutable — it can’t be modified. A function can return the modified
+- Elixir code is divided into modules and functions.
+- Elixir is a dynamic language. The type of a variable is determined by the value it holds.
+- Data is immutable — it can’t be modified. A function can return the modified
   version of the input that resides in another memory location. The modified version
   shares as much memory as possible with the original data.
-* The most important primitive data types are numbers, atoms, and binaries.
-* There is no Boolean type. Instead, the atoms true and false are used.
-* There is no nullability. The atom nil can be used for this purpose.
-* There is no string type. Instead, you can use either binaries (recommended) or
+- The most important primitive data types are numbers, atoms, and binaries.
+- There is no Boolean type. Instead, the atoms true and false are used.
+- There is no nullability. The atom nil can be used for this purpose.
+- There is no string type. Instead, you can use either binaries (recommended) or
   lists (when needed).
-* The built-in complex types are tuples, lists, and maps. Tuples are used to group
+- The built-in complex types are tuples, lists, and maps. Tuples are used to group
   a small, fixed-size number of fields. Lists are used to manage variable-size collections.
   A map is a key/value data structure.
-* Range, keyword lists, MapSet, Date, Time, NaiveDateTime, and DateTime are
+- Range, keyword lists, MapSet, Date, Time, NaiveDateTime, and DateTime are
   abstractions built on top of the existing built-in types.
-* Functions are first-class citizens.
-* Module names are atoms (or aliases) that correspond to .beam files on the disk.
-* There are multiple ways of starting programs: iex, elixir, and the mix tool.
+- Functions are first-class citizens.
+- Module names are atoms (or aliases) that correspond to .beam files on the disk.
+- There are multiple ways of starting programs: iex, elixir, and the mix tool.
 
 # Week 7
 
@@ -1261,7 +1282,7 @@ Function_pattern.sum({4, 5})
 9
 ```
 
-##### Method overloading  and overriding in elixir
+##### Method overloading and overriding in elixir
 
 <!-- livebook:{"break_markdown":true} -->
 
@@ -1338,10 +1359,10 @@ If, for instance, you call my_admin.(a, b, c, d), where a, b, c, and d are argum
 # using the famous gigo ... garbage in gargabe out
 # we can assign our functions to a lambda fn using the capture operator
 # how?
-# will be of arity 3 
+# will be of arity 3
 my_admin = &User_details.user(&1, &2, &3)
 # &User_details.user/3
-# will be of arity 2 
+# will be of arity 2
 my_user = &User_details.user(&1, &2)
 # &User_details.user/2
 ```
@@ -1463,10 +1484,10 @@ The set of operators and functions that can be called from guards is very limite
 particular, you may not call your own functions, and most of the other functions won’t
 work. These are some examples of operators and functions allowed in guards:
 
-* Comparison operators (==, !=, ===, !==, >, <, <=, >=)
-* Boolean operators (and, or) and negation operators (not, !)
-* Arithmetic operators (+, -, *, /)
-* Type-check functions from the Kernel module (for example, is_number/1, is_
+- Comparison operators (==, !=, ===, !==, >, <, <=, >=)
+- Boolean operators (and, or) and negation operators (not, !)
+- Arithmetic operators (+, -, \*, /)
+- Type-check functions from the Kernel module (for example, is*number/1, is*
   atom/1, and so on)
 
 ```elixir
@@ -1547,8 +1568,8 @@ expression is internally handled.
 
 <!-- livebook:{"break_markdown":true} -->
 
-* Anonymous functions (lambdas) may also consist of multiple clauses.
-* recall the
+- Anonymous functions (lambdas) may also consist of multiple clauses.
+- recall the
   basic way of defining and using lambdas:
 
 ```elixir
@@ -1647,4 +1668,157 @@ test_num.(1)
 
 ```
 :positive
+```
+
+## Week 8
+
+# if and unless
+
+- The _if_ statement executes the command if the specified condition is truth, and _unless_ does the opposite, the command is executed if the condition is false.
+
+```elixir
+#example  of if condition
+color="blue"
+
+if color == "blue" do
+"yes"
+end
+
+# output: "yes"
+```
+
+```elixir
+#example of a one liner
+if color == "blue", do: "yes
+```
+
+```elixir
+#example 2 of unless which does the opposite
+color="blue"
+
+unless color == "blue" do
+"yes"
+end
+
+# output: nil
+
+unless color != "blue" do
+"yes"
+end
+
+# output: "yes"
+```
+
+```elixir
+#example of a one liner
+unless color == "blue", do: "yes
+nil
+```
+
+## if else
+
+```elixir
+#example  of if else condition
+color="blue"
+
+if color == "red" do
+"yes"
+else
+"no"
+end
+
+# output: "no"
+
+#example of a one liner
+if color == "blue", do: "yes, else: "no"
+# output: "no"
+```
+
+> same can happen to unlesss (else)
+
+## Case (->)
+
+syntax
+
+```elixir
+case expression do
+pattern_1 -> #pattern here indicates that it deals with pattern matching.
+...
+pattern_2 ->
+...
+...
+end
+```
+
+- In the case construct, the provided expression is evaluated, and then the result is matched against the given clauses.
+- The first one that matches is executed, and the result of the corresponding
+  block (its last expression) is the result of the entire case expression.
+- If no clause matches, an error is raised.
+
+> Note: The case construct is most suitable if you don’t want to define a separate multiclause
+> function.
+
+> In fact, the general case syntax can be directly translated into the multiclause approach:
+
+```elixir
+defp fun(pattern_1), do: ...
+defp fun(pattern_2), do: ...
+... #The default clause that always matches
+```
+
+### The with special form (with)
+
+- The with special form, an be very useful when you need to chain a couple of expressions and return the error of the first expression that fails.
+- Take a scenario:
+  > Suppose you need to process registration data submitted by a user. The input is a
+  > map, with keys being strings (“login”, “email”, and “password”).
+
+```elixir
+%{
+"login" => "alice",
+"email" => "alice@gmail.com",
+"password" => "password",
+"other_field" => "some_value",
+"yet_another_field" => "...",
+...
+}
+```
+
+> Task is to normalize this map into a map that contains only the fields login, email,
+> and password.
+
+> if the set of fields is well-defined and known upfront, you can
+> represent the keys as atoms. Therefore, for the given input, you can return the following
+> structure:
+
+```elixir
+%{login: "alice", email: "some_email", password: "password"}
+```
+
+syntax
+
+```elixir
+with pattern_1 <- expression_1,
+pattern_2 <- expression_2,
+...
+do
+...
+end
+```
+
+> You start from the top, evaluating the first expression and matching the result against
+> the corresponding pattern. If the match succeeds, you move to the next expression. If
+> all the expressions are successfully matched, you end up in the do block, and the result
+> of the with expression is the result of the last expression in the do block.
+> If any match fails, however, with will not proceed to evaluate subsequent expressions.
+> Instead, it will immediately return the result that couldn’t be matched.
+
+
+Example
+```elixir
+iex(1)> with {:ok, login} <- {:ok, "alice"},
+        {:ok, email} <- {:ok, "some_email"} do
+        %{login: login, email: email}
+      end
+%{email: "some_email", login: "alice"}
 ```
