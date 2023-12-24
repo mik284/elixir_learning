@@ -1813,12 +1813,31 @@ end
 > If any match fails, however, with will not proceed to evaluate subsequent expressions.
 > Instead, it will immediately return the result that couldn’t be matched.
 
-
 Example
+
 ```elixir
 iex(1)> with {:ok, login} <- {:ok, "alice"},
         {:ok, email} <- {:ok, "some_email"} do
         %{login: login, email: email}
       end
 %{email: "some_email", login: "alice"}
+```
+
+also can be written as
+
+```elixir
+{:ok, login} = {:ok, "alice"}
+{:ok, email} = {:ok, "email"}
+%{login: login, email: email}
+```
+> NB:
+> The benefit of with is that it returns the first term that fails to be matched against the
+corresponding pattern:
+
+```elixir
+iex(2)> with {:ok, login} <- {:error, "login missing"},
+        {:ok, email} <- {:ok, "email"} do
+        %{login: login, email: email}
+        end
+{:error, "login missing"}
 ```
