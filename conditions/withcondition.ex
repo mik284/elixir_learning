@@ -9,24 +9,31 @@ defmodule WithCondition do
   defp extract_password(_), do: {:error, "password missing"}
 
   def extract_user(user) do
-    case extract_login(user) do
-      {:error, reason} ->
-        {:error, reason}
+    # case extract_login(user) do
+    #   {:error, reason} ->
+    #     {:error, reason}
 
-      {:ok, login} ->
-        case extract_email(user) do
-          {:error, reason} ->
-            {:error, reason}
+    #   {:ok, login} ->
+    #     case extract_email(user) do
+    #       {:error, reason} ->
+    #         {:error, reason}
 
-          {:ok, email} ->
-            case extract_password(user) do
-              {:error, reason} ->
-                {:error, reason}
+    #       {:ok, email} ->
+    #         case extract_password(user) do
+    #           {:error, reason} ->
+    #             {:error, reason}
 
-              {:ok, password} ->
-                %{login: login, email: email, password: password}
-            end
-        end
+    #           {:ok, password} ->
+    #             %{login: login, email: email, password: password}
+    #         end
+    # end
+    # end
+
+    # using with which is short and clearer
+    with {:ok, login} <- extract_login(user),
+         {:ok, email} <- extract_email(user),
+         {:ok, password} <- extract_password(user) do
+      {:ok, %{login: login, email: email, password: password}}
     end
   end
 end
