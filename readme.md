@@ -1841,3 +1841,44 @@ iex(2)> with {:ok, login} <- {:error, "login missing"},
         end
 {:error, "login missing"}
 ```
+
+
+```elixir
+defp extract_login(%{"login" => login}), do: {:ok, login}
+defp extract_login(_), do: {:error, "login missing"}
+
+defp extract_email(%{"email" => email}), do: {:ok, email}
+defp extract_email(_), do: {:error, "email missing"}
+
+defp extract_password(%{"password" => password}), do: {:ok, password}
+defp extract_password(_), do: {:error, "password missing"}
+
+
+def extract_user(user) do
+    with {:ok, login} <- extract_login(user),
+    {:ok, email} <- extract_email(user),
+    {:ok, password} <- extract_password(user) do
+    {:ok, %{login: login, email: email, password: password}}
+  end
+end
+```
+
+* This code is much shorter and clearer. You extract desired pieces of
+data, moving forward only if you succeed.
+* If something fails, you return the first error. Otherwise, you return the normalized structure.
+
+```elixir
+$ iex user_extraction.ex
+
+iex(1)> UserExtraction.extract_user(%{})
+      {:error, "login missing"}
+iex(2)> UserExtraction.extract_user(%{"login" => "some_login"})
+      {:error, "email missing"}
+iex(3)> UserExtraction.extract_user(%{"login" => "some_login",
+      "email" => "some_email"})
+{:error, "password missing"}
+iex(4)> UserExtraction.extract_user(%{"login" => "some_login",
+      "email" => "some_email",
+      "password" => "some_password"})
+{:ok, %{email: "some_email", login: "some_login", password: "some_password"}}
+```
