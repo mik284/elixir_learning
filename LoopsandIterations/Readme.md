@@ -6,7 +6,7 @@
 
 #### Iterating with recursion
 
-- implement a function that prints the first n natural numbers
+* implement a function that prints the first n natural numbers
   (positive integers).
 
 ```elixir
@@ -18,3 +18,7 @@ defmodule NaturalNums do
         end
 end
 ```
+
+> This code relies on recursion, pattern matching, and multiclause functions. The code
+> is very declarative: if n is equal to 1, you print the number. Otherwise, you print the first
+> n – 1 numbers and then the nth one.
