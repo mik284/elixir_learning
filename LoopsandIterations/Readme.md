@@ -38,3 +38,16 @@ end
   > - The sum of all the elements of an empty list is 0.
   > - The sum of all the elements of a non-empty list equals the list’s head plus the sum
   >   of the list’s tail.
+
+```elixir
+iex(1)> ListHelper.sum([1, 2, 3])
+6
+iex(2)> ListHelper.sum([])
+0
+```
+
+> Note: 
+>  You probably know from other languages that a function call will lead to a stack push,
+and therefore will consume some memory. A very deep recursion might lead to a
+stack overflow and crash the entire program. This isn’t necessarily a problem in Elixir,
+because of the tail-call optimization.
