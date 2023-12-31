@@ -7,6 +7,4 @@ defmodule NaturalNums do
     end
 
   def print(_args), do: {:error , "Invalid input"}
-
-
 end
