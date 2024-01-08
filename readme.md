@@ -13,8 +13,8 @@ Elixir is a powerful and functional programming language designed for building s
 - Books : https://elixir-lang.org/learning.html
 - school : https://elixirschool.com/en
   
-#### PHOENIX Resources
--[LogRocket/Build rest api with phoenix](https://blog.logrocket.com/build-rest-api-elixir-phoenix/)
+#### PHOENIX RestApi Resources
+- [LogRocket/Build rest api with phoenix](https://blog.logrocket.com/build-rest-api-elixir-phoenix/)
 - [Blog for RestAPI by: saswat.dev](https://saswat.dev/build-a-simple-rest-api-with-elixir-part-1/)
 - [medium RestApi: without phoenix](https://helabenkhalfallah.medium.com/elixir-json-restful-api-without-phoenix-df2eed644659)
 - [Rest API with Phoenix Bigginer level](https://www.dairon.org/2020/07/06/simple-rest-api-with-elixir-phoenix.html)
