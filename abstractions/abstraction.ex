@@ -7,6 +7,9 @@ defmodule TodoList do
       [title],
       fn titles -> [title | titles] end
     )
+  end
 
+  def entries(todo_list,date) do
+    Map.get(todo_list,date,[])
   end
 end
