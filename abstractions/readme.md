@@ -29,3 +29,15 @@ it to the next one
 first argument.
 * Modifier functions return a modified version of the abstraction.
 * Query functions return some other type of data.
+
+## Abstracting with modules
+MapSet module is a high-level data abstraction which implements Set and its a good example of
+how to design an abstraction in elixir.
+```elixir
+iex(1)> days =
+MapSet.new() |> <---Instances the abstraction
+MapSet.put(:monday) |> <--- Modifies the abstraction
+MapSet.put(:tuesday)
+iex(2)> MapSet.member?(days, :monday) <--- Queries the abstraction
+true
+```
