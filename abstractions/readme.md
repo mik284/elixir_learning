@@ -33,6 +33,7 @@ first argument.
 ## Abstracting with modules
 MapSet module is a high-level data abstraction which implements Set and its a good example of
 how to design an abstraction in elixir.
+
 ```elixir
 iex(1)> days =
 MapSet.new() |> <---Instances the abstraction
