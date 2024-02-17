@@ -42,3 +42,12 @@ MapSet.put(:tuesday)
 iex(2)> MapSet.member?(days, :monday) <--- Queries the abstraction
 true
 ```
+
+>> this approach follows the principles stated ealier, The code is slightly
+simplified by using the pipeline operator to chain operations together. This is possible
+because all the functions from the MapSet module take a set as the first argument. Such
+functions are pipeline-friendly and can be chained with the |> operator.
+
+>> NOTE You may think that abstractions like MapSet are something like user-defined
+types. Although there are many similarities, module-based abstractions aren’t
+proper data types. Instead, they’re implemented by composing built-in data types. For example, a MapSet instance is also a map, which you can verify by invoking is_map(MapSet.new())
