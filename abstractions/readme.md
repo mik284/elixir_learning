@@ -50,4 +50,10 @@ functions are pipeline-friendly and can be chained with the |> operator.
 
 >> NOTE You may think that abstractions like MapSet are something like user-defined
 types. Although there are many similarities, module-based abstractions aren’t
-proper data types. Instead, they’re implemented by composing built-in data types. For example, a MapSet instance is also a map, which you can verify by invoking is_map(MapSet.new())
+proper data types. Instead, they’re implemented by composing built-in data types. For example, a MapSet instance is also a map, which you can verify by invoking is_map(MapSet.new()).
+
+## Basic abstraction
+The basic version of the to-do list will support the following features:
+* Creating a new data abstraction
+* Adding new entries
+* Querying the abstraction
