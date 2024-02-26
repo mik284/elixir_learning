@@ -72,4 +72,8 @@ iex(3)> TodoList.entries(todo_list, ~D[2018-12-18])
 ```
 
 ## Composing abstractions
-The above code can be put to a separate abstration
+* The above code can be put to a separate abstration
+* There are different tools to create abstractions (stateless modules
+and pure functions instead of classes and methods), but the general idea is the same.
+
+## Structuring data with maps
