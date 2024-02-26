@@ -57,3 +57,23 @@ The basic version of the to-do list will support the following features:
 * Creating a new data abstraction
 * Adding new entries
 * Querying the abstraction
+  
+```elixir
+$ iex simple_todo.ex
+iex(1)> todo_list =
+            TodoList.new() |>
+            TodoList.add_entry(~D[2018-12-19], "Dentist") |>
+            TodoList.add_entry(~D[2018-12-20], "Shopping") |>
+            TodoList.add_entry(~D[2018-12-19], "Movies")
+iex(2)> TodoList.entries(todo_list, ~D[2018-12-19])
+["Movies", "Dentist"]
+iex(3)> TodoList.entries(todo_list, ~D[2018-12-18])
+[]
+```
+
+## Composing abstractions
+* The above code can be put to a separate abstration
+* There are different tools to create abstractions (stateless modules
+and pure functions instead of classes and methods), but the general idea is the same.
+
+## Structuring data with maps
