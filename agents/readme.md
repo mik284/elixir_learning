@@ -145,3 +145,9 @@ Agent.stop(:my_agent)
 * Persistence: State is lost if the Agent crashes (use supervision for restarts or external storage for persistence).
 
 * Performance: Message-passing overhead may affect high-throughput scenarios.
+
+
+## TODO
+ 1. How to use Supervise Agents
+ 2. How to use GenServer
+ 3. How to use GenServer with Supervisor
